@@ -31,13 +31,35 @@ class ProductList:
 
     def handleProductPressed(self, product):
         # QMessageBox.about(self.widget, "Hello", "My StackOverflow code was so long that nobody wanted to read it")
-        button = QPushButton("Deseja realmente comprar?", self.widget)
-        button.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 25px; font-weight: bold; color: white")
-        button.setSizePolicy(
-            QSizePolicy.Preferred,
-            QSizePolicy.Preferred)
-        button.move(self.width/2,self.height/2)
-        button.show()
+        self.popup = QWidget()
+        self.popup.setStyleSheet("background-color: rgba(0, 255, 0, 0); border: none; font-size: 25px; font-weight: bold; color: white")
+        self.popup.setWindowFlags(Qt.Widget | Qt.FramelessWindowHint);
+        self.popup.setAttribute(Qt.WA_TranslucentBackground, True)
+        self.popup.setAttribute(Qt.WA_NoSystemBackground, True)
+        self.popup.setAttribute(Qt.WA_PaintOnScreen, True)
+        self.popup.setGeometry(QRect(100, 100, 400, 200))
+            # w.setStyleSheet("background: url(background.jpg) center;")
+        grid = QGridLayout(self.popup)
+
+        buttonLabel = "Deseja realmente comprar '{}' por R${}?".format(product.name, product.price)
+        button = QLabel(buttonLabel)
+        button.setAlignment(Qt.AlignCenter)
+        button.setStyleSheet("background-color: rgba(0, 0, 0, 150); border: none; font-size: 25px; font-weight: bold; color: white")
+
+        grid.addWidget(button, 0, 0)
+
+        btnYes = QLabel("Sim")
+        btnYes.setStyleSheet("background-color: rgba(0, 0, 0, 150); border: none; font-size: 25px; font-weight: bold; color: white")
+
+        grid.addWidget(button, 1, 0)
+
+
+        btnNo = QLabel("Nao")
+        btnNo.setStyleSheet("background-color: rgba(0, 0, 0, 150); border: none; font-size: 25px; font-weight: bold; color: white")
+
+        grid.addWidget(button, 1, 1)
+
+        self.popup.show()
 
     def createWidget(self):
         widget = QWidget()

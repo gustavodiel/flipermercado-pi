@@ -1,4 +1,5 @@
 import sys
+
 import sip
 
 from PyQt4.QtGui import *

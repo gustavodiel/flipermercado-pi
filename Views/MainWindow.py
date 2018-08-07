@@ -1,7 +1,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from Views.ProductList import ProductList
+from ProductList import ProductList
 
 class MainWindow:
     def __init__(self):
