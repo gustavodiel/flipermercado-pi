@@ -1,7 +1,8 @@
 from functools import partial
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtCore import *
+from PySide2.QtWidgets import *
 
 from product_model import Product
 
@@ -63,6 +64,7 @@ class ProductList:
 
     def createWidget(self):
         widget = QWidget()
+        widget.setCursor(Qt.BlankCursor)
             # w.setStyleSheet("background: url(background.jpg) center;")
 
         grid = QGridLayout(widget)

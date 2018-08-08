@@ -1,7 +1,8 @@
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtCore import *
+from PySide2.QtWidgets import *
 
-from ProductList import ProductList
+from Views.ProductList import ProductList
 
 class MainWindow:
     def __init__(self):
@@ -23,6 +24,8 @@ class MainWindow:
 
     def createWidget(self):
         widget = QWidget()
+        widget.setGeometry(QRect(0, 0, 640, 480))
+        widget.setCursor(Qt.BlankCursor)
 
         shape = QDesktopWidget().screenGeometry()
         width = shape.width()
@@ -36,8 +39,10 @@ class MainWindow:
         bg.setAlignment(Qt.AlignCenter)
 
         pic = QLabel()
-        pic.setPixmap(QPixmap("assets/logo.png"))
-        pic.resize(300, 300)
+        image = QPixmap("assets/logo.png")
+        pixmap_resized = image.scaled(256, 256, Qt.KeepAspectRatio)
+        pic.setPixmap(pixmap_resized)
+        pic.setStyleSheet("width: 30px")
         pic.setAlignment(Qt.AlignCenter)
 
 
