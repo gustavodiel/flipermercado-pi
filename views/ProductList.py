@@ -1,12 +1,63 @@
 from functools import partial
 
-from PySide2.QtGui import *
-from PySide2.QtCore import *
-from PySide2.QtWidgets import *
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
 
 from product_model import Product
 
+class PopupWidget(QWidget):
+    def __init__(self, parent_widget, product):
+        QWidget.__init__(self)
+        self.parent_widget = parent_widget
+
+        self.seconds_remaining = 15
+
+        self.product = product
+
+        shape = QDesktopWidget().screenGeometry()
+        self.width = shape.width()
+        self.height = shape.height()
+
+        self.bg = QLabel(self)
+        self.bg.setStyleSheet("background-color: rgba(0, 0, 0, 200);")
+        self.bg.setGeometry(0, 0, self.width, self.height)
+        self.bg.setAlignment(Qt.AlignCenter)
+
+
+        grid = QGridLayout(self)
+
+        # Are you sure you wanna buy? label
+        self.are_you_sure_label = QLabel("Passe o seu token RFDI para comprar '{}' por R${}?\n{}s".format(self.product.name, self.product.price, self.seconds_remaining))
+        self.are_you_sure_label.setAlignment(Qt.AlignCenter)
+        self.are_you_sure_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 28px; font-weight: bold; color: white")
+
+        # No button
+        self.no_button = QPushButton("Cancelar")
+        self.no_button.clicked.connect(self.handleCancelPurchase)
+        self.no_button.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 32px; font-weight: bold; color: white")
+
+        # Add the
+        grid.addWidget(self.are_you_sure_label, 0, 0, 1, 2)
+        grid.addWidget(self.no_button, 1, 0, 2, 2)
+
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.update)
+        self.timer.start(1000) #trigger every second.
+
+    def update(self):
+        self.seconds_remaining -= 1
+        self.are_you_sure_label.setText("Passe o seu token RFDI para comprar '{}' por R${}?\n{}s".format(self.product.name, self.product.price, self.seconds_remaining))
+
+    def closeEvent(self, event):
+        self.parent_widget.setGraphicsEffect(None)
+        event.accept()
+
+    def handleCancelPurchase(self):
+        self.close()
+
 class ProductList:
+    ''' Controlls the product list view, and the objects '''
+
     def __init__(self):
         self.LIMIT_ITEMS_COUNT_X = 5
 
@@ -32,35 +83,14 @@ class ProductList:
 
     def handleProductPressed(self, product):
         # QMessageBox.about(self.widget, "Hello", "My StackOverflow code was so long that nobody wanted to read it")
-        self.popup = QWidget()
-        self.popup.setStyleSheet("background-color: rgba(0, 255, 0, 0); border: none; font-size: 25px; font-weight: bold; color: white")
+        self.popup = PopupWidget(self.widget, product)
         self.popup.setWindowFlags(Qt.Widget | Qt.FramelessWindowHint);
         self.popup.setAttribute(Qt.WA_TranslucentBackground, True)
         self.popup.setAttribute(Qt.WA_NoSystemBackground, True)
-        self.popup.setAttribute(Qt.WA_PaintOnScreen, True)
-        self.popup.setGeometry(QRect(100, 100, 400, 200))
-            # w.setStyleSheet("background: url(background.jpg) center;")
-        grid = QGridLayout(self.popup)
 
-        buttonLabel = "Deseja realmente comprar '{}' por R${}?".format(product.name, product.price)
-        button = QLabel(buttonLabel)
-        button.setAlignment(Qt.AlignCenter)
-        button.setStyleSheet("background-color: rgba(0, 0, 0, 150); border: none; font-size: 25px; font-weight: bold; color: white")
+        self.widget.setGraphicsEffect(QGraphicsBlurEffect())
 
-        grid.addWidget(button, 0, 0)
-
-        btnYes = QLabel("Sim")
-        btnYes.setStyleSheet("background-color: rgba(0, 0, 0, 150); border: none; font-size: 25px; font-weight: bold; color: white")
-
-        grid.addWidget(button, 1, 0)
-
-
-        btnNo = QLabel("Nao")
-        btnNo.setStyleSheet("background-color: rgba(0, 0, 0, 150); border: none; font-size: 25px; font-weight: bold; color: white")
-
-        grid.addWidget(button, 1, 1)
-
-        self.popup.show()
+        self.popup.showFullScreen()
 
     def createWidget(self):
         widget = QWidget()

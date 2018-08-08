@@ -1,43 +1,53 @@
-from PySide2.QtGui import *
-from PySide2.QtCore import *
-from PySide2.QtWidgets import *
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
 
-from Views.ProductList import ProductList
+from views.ProductList import ProductList
 
 class MainWindow:
+    """ Initiates the main application and the window view """
+
     def __init__(self):
         self.widget = self.createWidget()
-
         self.product_list = ProductList()
 
+    ''' Shows the main widget '''
     def show(self):
         self.widget.showFullScreen()
 
+    ''' Hides the main widget '''
     def hide(self):
         self.widget.hide()
 
+    ''' Whenever the Comprar button is pressed '''
     def handleComprarButton(self):
         self.product_list.show()
 
+    ''' Whenever the user presses Saldo button '''
     def handleSaldoButton(self):
         print(" asass ")
 
+    ''' Creates the main widget '''
     def createWidget(self):
         widget = QWidget()
-        widget.setGeometry(QRect(0, 0, 640, 480))
+
+        # This disables the cursor
         widget.setCursor(Qt.BlankCursor)
 
+        # Because we want to adapt to the screen, we take it's shape
         shape = QDesktopWidget().screenGeometry()
         width = shape.width()
         height = shape.height()
 
+        # We use the Grid to better space our objects, easly
         grid = QGridLayout(widget)
 
+        # Background
         bg = QLabel(widget)
         bg.setPixmap(QPixmap("assets/background.jpg"))
         bg.resize(width, height)
         bg.setAlignment(Qt.AlignCenter)
 
+        # Logo picture up top
         pic = QLabel()
         image = QPixmap("assets/logo.png")
         pixmap_resized = image.scaled(256, 256, Qt.KeepAspectRatio)
@@ -46,22 +56,23 @@ class MainWindow:
         pic.setAlignment(Qt.AlignCenter)
 
 
-        # Add a button
+        # Comprar button
         btn = QPushButton('Comprar')
         btn.clicked.connect(self.handleComprarButton)
         btn.setSizePolicy(
             QSizePolicy.Preferred,
             QSizePolicy.Preferred)
-        btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 25px; font-weight: bold; color: white")
+        btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 28px; font-weight: bold; color: white")
 
-        # Add a button
+        # Sald button
         btn2 = QPushButton('Saldo')
         btn2.clicked.connect(self.handleSaldoButton)
         btn2.setSizePolicy(
             QSizePolicy.Preferred,
             QSizePolicy.Preferred)
-        btn2.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 25px; font-weight: bold; color: white")
+        btn2.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 28px; font-weight: bold; color: white")
 
+        # Add all the widgets to the grid view
         grid.addWidget(pic, 0, 0)
         grid.addWidget(btn, 1, 0)
         grid.addWidget(btn2, 2, 0)
