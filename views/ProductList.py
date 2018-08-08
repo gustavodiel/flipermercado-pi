@@ -29,7 +29,7 @@ class PopupWidget(QWidget):
         # Are you sure you wanna buy? label
         self.are_you_sure_label = QLabel("Passe o seu token RFDI para comprar '{}' por R${}?\n{}s".format(self.product.name, self.product.price, self.seconds_remaining))
         self.are_you_sure_label.setAlignment(Qt.AlignCenter)
-        self.are_you_sure_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 24px; font-weight: bold; color: white")
+        self.are_you_sure_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 18px; font-weight: bold; color: white")
 
         # No button
         self.no_button = QPushButton("Cancelar")
@@ -45,7 +45,7 @@ class PopupWidget(QWidget):
         self.timer.start(1000) #trigger every second.
 
     def update(self):
-        if self.are_you_sure_label <= 0:
+        if self.seconds_remaining <= 0:
             self.close()
 
         self.seconds_remaining -= 1
