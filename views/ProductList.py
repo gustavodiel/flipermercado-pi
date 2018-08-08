@@ -45,9 +45,9 @@ class PopupWidget(QWidget):
         self.timer.start(1000) #trigger every second.
 
     def update(self):
-        if self.are_you_sure_label == 0:
+        if self.are_you_sure_label <= 0:
             self.close()
-            
+
         self.seconds_remaining -= 1
         self.are_you_sure_label.setText("Passe o seu token RFDI para comprar '{}' por R${}?\n{}s".format(self.product.name, self.product.price, self.seconds_remaining))
 
