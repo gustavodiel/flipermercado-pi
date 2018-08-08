@@ -29,7 +29,7 @@ class PopupWidget(QWidget):
         # Are you sure you wanna buy? label
         self.are_you_sure_label = QLabel("Passe o seu token RFDI para comprar '{}' por R${}?\n{}s".format(self.product.name, self.product.price, self.seconds_remaining))
         self.are_you_sure_label.setAlignment(Qt.AlignCenter)
-        self.are_you_sure_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 28px; font-weight: bold; color: white")
+        self.are_you_sure_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 24px; font-weight: bold; color: white")
 
         # No button
         self.no_button = QPushButton("Cancelar")
@@ -84,9 +84,7 @@ class ProductList:
     def handleProductPressed(self, product):
         # QMessageBox.about(self.widget, "Hello", "My StackOverflow code was so long that nobody wanted to read it")
         self.popup = PopupWidget(self.widget, product)
-        self.popup.setWindowFlags(Qt.Widget | Qt.FramelessWindowHint);
-        self.popup.setAttribute(Qt.WA_TranslucentBackground, True)
-        self.popup.setAttribute(Qt.WA_NoSystemBackground, True)
+        
 
         self.widget.setGraphicsEffect(QGraphicsBlurEffect())
 
