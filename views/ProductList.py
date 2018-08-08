@@ -45,6 +45,9 @@ class PopupWidget(QWidget):
         self.timer.start(1000) #trigger every second.
 
     def update(self):
+        if self.are_you_sure_label == 0:
+            self.close()
+            
         self.seconds_remaining -= 1
         self.are_you_sure_label.setText("Passe o seu token RFDI para comprar '{}' por R${}?\n{}s".format(self.product.name, self.product.price, self.seconds_remaining))
 
@@ -84,7 +87,9 @@ class ProductList:
     def handleProductPressed(self, product):
         # QMessageBox.about(self.widget, "Hello", "My StackOverflow code was so long that nobody wanted to read it")
         self.popup = PopupWidget(self.widget, product)
-        
+        # self.popup.setWindowFlags(Qt.Widget | Qt.FramelessWindowHint);
+        # self.popup.setAttribute(Qt.WA_TranslucentBackground, True)
+        # self.popup.setAttribute(Qt.WA_NoSystemBackground, True)
 
         self.widget.setGraphicsEffect(QGraphicsBlurEffect())
 
