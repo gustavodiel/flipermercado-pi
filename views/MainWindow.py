@@ -1,14 +1,14 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from views.ProductList import ProductList
+from views.category_view import CategoryView
 
 class MainWindow:
     """ Initiates the main application and the window view """
 
     def __init__(self):
         self.widget = self.createWidget()
-        self.product_list = ProductList()
+        self.category_view = CategoryView()
 
     ''' Shows the main widget '''
     def show(self):
@@ -20,7 +20,7 @@ class MainWindow:
 
     ''' Whenever the Comprar button is pressed '''
     def handleComprarButton(self):
-        self.product_list.show()
+        self.category_view.show()
 
     ''' Whenever the user presses Saldo button '''
     def handleSaldoButton(self):
@@ -31,7 +31,7 @@ class MainWindow:
         widget = QWidget()
 
         # This disables the cursor
-        widget.setCursor(Qt.BlankCursor)
+        # widget.setCursor(Qt.BlankCursor)
 
         # Because we want to adapt to the screen, we take it's shape
         shape = QDesktopWidget().screenGeometry()

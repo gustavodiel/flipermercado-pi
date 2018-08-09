@@ -4,24 +4,26 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
 from models.product_model import Product
+from models.category_model import Category
 
-from views.popup_view import PopupView
+from views.ProductList import ProductList
 
-class ProductList:
+class CategoryView(QWidget):
     ''' Controlls the product list view, and the objects '''
 
-    def __init__(self, products):
-        self.LIMIT_ITEMS_COUNT_X = 4
-        self.LIMIT_ITEMS_COUNT_Y = 2
+    def __init__(self):
+        QWidget.__init__(self)
+        self.LIMIT_ITEMS_COUNT_X = 5
+        print("Created")
 
         shape = QDesktopWidget().screenGeometry()
         self.width = shape.width()
         self.height = shape.height()
 
-        self.products = products
+        self.categories = self.get_categories()
         self.widget = self.createWidget()
 
-    def getProducts(self):
+    def get_categories(self):
         return Category.get_categories()
 
     def show(self):
@@ -30,12 +32,12 @@ class ProductList:
     def hide(self):
         self.widget.hide()
 
-    def handleProductPressed(self, product):
-        self.popup = PopupView(self.widget, product)
-        self.popup.showFullScreen()
+    def handle_category_pressed(self, category):
+        self.product_list = ProductList(category.products)
+        self.product_list.show()
 
     def handle_back_button_pressed(self):
-        self.widget.close()
+        self.hide()
 
     def createWidget(self):
         widget = QWidget()
@@ -50,23 +52,21 @@ class ProductList:
         # Add a button
         posX = 0
         posY = 0
-        for i in self.products:
-            btn = QPushButton('{}\nR${:.2f}'.format(i.name, i.price))
-            btn.clicked.connect(partial(self.handleProductPressed, i))
+        for i in self.categories:
+            btn = QPushButton('{}\n{}'.format(i.name, len(i.products)))
+            btn.clicked.connect(partial(self.handle_category_pressed, i))
             btn.setSizePolicy(
                 QSizePolicy.Preferred,
                 QSizePolicy.Preferred)
 
             btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 25px; font-weight: bold; color: white")
 
-            grid.addWidget(btn, posY, posX, len(self.products) > 4 and 1 or 2, 1)
+            grid.addWidget(btn, posY, posX, 2, 1)
             posX += 1
 
             if posX > self.LIMIT_ITEMS_COUNT_X:
                 posX = 0
                 posY += 1
-            if posY >= self.LIMIT_ITEMS_COUNT_Y:
-                print("WOo")
 
         button_back = QPushButton('Voltar')
         button_back.clicked.connect(self.handle_back_button_pressed)

@@ -5,8 +5,6 @@ import sip
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from product_model import Product
-
 from views.MainWindow import MainWindow
 
 
