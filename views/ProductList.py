@@ -76,6 +76,6 @@ class ProductList:
 
         button_back.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 28px; font-weight: bold; color: white")
 
-        grid.addWidget(button_back, 2, 0, 1, -1)
+        grid.addWidget(button_back, round(len(self.products) / self.LIMIT_ITEMS_COUNT_X), 0, 1, -1)
 
         return widget
