@@ -11,7 +11,7 @@ class ProductList:
     ''' Controlls the product list view, and the objects '''
 
     def __init__(self, products):
-        self.LIMIT_ITEMS_COUNT_X = 4
+        self.LIMIT_ITEMS_COUNT_X = 3
         self.LIMIT_ITEMS_COUNT_Y = 2
 
         shape = QDesktopWidget().screenGeometry()
@@ -57,7 +57,7 @@ class ProductList:
                 QSizePolicy.Preferred,
                 QSizePolicy.Preferred)
 
-            btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 22px; font-weight: bold; color: white")
+            btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
 
             grid.addWidget(btn, posY, posX, len(self.products) > 4 and 1 or 2, 1)
             posX += 1
