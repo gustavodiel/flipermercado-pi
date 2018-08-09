@@ -11,8 +11,8 @@ class ProductList:
     ''' Controlls the product list view, and the objects '''
 
     def __init__(self, products):
-        self.LIMIT_ITEMS_COUNT_X = 3
-        self.LIMIT_ITEMS_COUNT_Y = 2
+        self.LIMIT_ITEMS_COUNT_X = 2
+        self.LIMIT_ITEMS_COUNT_Y = 1
 
         shape = QDesktopWidget().screenGeometry()
         self.width = shape.width()
