@@ -17,4 +17,4 @@ class Category:
                     Product(23, 'MONSTER verde'),Product(1, 'Guarana'),Product(0, "Laranjinha")]),
             Category("Bolachas/Biscoitos", [Product(6, 'Trakinas'),Product(4.50, 'Oreo'),Product(4.10, 'Bolacha Cartoon')]),
             Category("Salgados", [Product(1.32, 'EQUILIBRIIIII'),Product(2.52, 'Doritos'),Product(1.90, 'Ruffles <3'),
-                Product(23, 'Biluzitos')])]
+                Product(23, 'Biluzitos'),Product(66.99, 'Xablau')])]

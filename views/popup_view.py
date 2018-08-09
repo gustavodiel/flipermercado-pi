@@ -10,7 +10,7 @@ class PopupView(QWidget):
         QWidget.__init__(self)
         self.parent_widget = parent_widget
 
-        self.seconds_remaining = 15
+        self.seconds_remaining = 10
 
         self.product = product
 
@@ -27,7 +27,7 @@ class PopupView(QWidget):
         grid = QGridLayout(self)
 
         # Are you sure you wanna buy? label
-        self.are_you_sure_label = QLabel("Passe o seu token RFDI para comprar '{}' por R${:.2f}?\n{}s".format(self.product.name, self.product.price, self.seconds_remaining))
+        self.are_you_sure_label = QLabel("Passe o seu token RFDI para comprar '{}' por R${:.2f}\n{}s".format(self.product.name, self.product.price, self.seconds_remaining))
         self.are_you_sure_label.setAlignment(Qt.AlignCenter)
         self.are_you_sure_label.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 18px; font-weight: bold; color: white")
 
