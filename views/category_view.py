@@ -59,7 +59,7 @@ class CategoryView(QWidget):
                 QSizePolicy.Preferred,
                 QSizePolicy.Preferred)
 
-            btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 25px; font-weight: bold; color: white")
+            btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 22px; font-weight: bold; color: white")
 
             grid.addWidget(btn, posY, posX, 2, 1)
             posX += 1
@@ -74,7 +74,7 @@ class CategoryView(QWidget):
             QSizePolicy.Preferred,
             QSizePolicy.Preferred)
 
-        button_back.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 25px; font-weight: bold; color: white")
+        button_back.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 28px; font-weight: bold; color: white")
 
         grid.addWidget(button_back, 2, 0, 1, -1)
 
