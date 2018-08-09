@@ -59,7 +59,7 @@ class ProductList:
 
             btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
 
-            grid.addWidget(btn, posY, posX, len(self.products) > 4 and 1 or 2, 1)
+            grid.addWidget(btn, posY, posX, len(self.products) > self.LIMIT_ITEMS_COUNT_X and 1 or 2, 1)
             posX += 1
 
             if posX > self.LIMIT_ITEMS_COUNT_X:
