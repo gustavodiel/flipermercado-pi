@@ -17,6 +17,7 @@ The project is designed to be run on a [Raspberry Pi](https://www.raspberrypi.or
 
  - Write RFID module
  - Tests
+ - API Integration
  - Keep resources as low as possible
 
 ### License
