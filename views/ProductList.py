@@ -66,7 +66,7 @@ class ProductList:
                 posX = 0
                 posY += 1
             if posY >= self.LIMIT_ITEMS_COUNT_Y:
-                print("WOo")
+                pass
 
         button_back = QPushButton('Voltar')
         button_back.clicked.connect(self.handle_back_button_pressed)
