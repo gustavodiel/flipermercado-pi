@@ -1,5 +1,4 @@
-# Flipermercado Front-End
-
+# Flipermercado Raspberry Pi Client
 ### Requirements
 The project is designed to be run on a [Raspberry Pi](https://www.raspberrypi.org/), so, we decided to use as less packages as possible while being as cross plataform as possible.
 
