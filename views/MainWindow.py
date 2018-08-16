@@ -3,6 +3,7 @@ from PyQt4.QtCore import *
 
 from views.category_view import CategoryView
 
+
 class MainWindow:
     """ Initiates the main application and the window view """
 
@@ -11,22 +12,27 @@ class MainWindow:
         self.category_view = CategoryView()
 
     ''' Shows the main widget '''
+
     def show(self):
         self.widget.showFullScreen()
 
     ''' Hides the main widget '''
+
     def hide(self):
         self.widget.hide()
 
     ''' Whenever the Comprar button is pressed '''
+
     def handleComprarButton(self):
         self.category_view.show()
 
     ''' Whenever the user presses Saldo button '''
+
     def handleSaldoButton(self):
         print(" asass ")
 
     ''' Creates the main widget '''
+
     def createWidget(self):
         widget = QWidget()
 
@@ -55,14 +61,14 @@ class MainWindow:
         pic.setStyleSheet("width: 30px")
         pic.setAlignment(Qt.AlignCenter)
 
-
         # Comprar button
         btn = QPushButton('Comprar')
         btn.clicked.connect(self.handleComprarButton)
         btn.setSizePolicy(
             QSizePolicy.Preferred,
             QSizePolicy.Preferred)
-        btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 28px; font-weight: bold; color: white")
+        btn.setStyleSheet(
+            "background-color: rgba(0, 0, 0, 0); border: none; font-size: 28px; font-weight: bold; color: white")
 
         # Sald button
         btn2 = QPushButton('Saldo')
@@ -70,7 +76,8 @@ class MainWindow:
         btn2.setSizePolicy(
             QSizePolicy.Preferred,
             QSizePolicy.Preferred)
-        btn2.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: none; font-size: 28px; font-weight: bold; color: white")
+        btn2.setStyleSheet(
+            "background-color: rgba(0, 0, 0, 0); border: none; font-size: 28px; font-weight: bold; color: white")
 
         # Add all the widgets to the grid view
         grid.addWidget(pic, 0, 0)

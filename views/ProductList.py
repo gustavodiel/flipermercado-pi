@@ -3,9 +3,9 @@ from functools import partial
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from models.product_model import Product
-
+from models.category_model import Category
 from views.popup_view import PopupView
+
 
 class ProductList:
     ''' Controlls the product list view, and the objects '''
@@ -57,7 +57,8 @@ class ProductList:
                 QSizePolicy.Preferred,
                 QSizePolicy.Preferred)
 
-            btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
+            btn.setStyleSheet(
+                "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
 
             grid.addWidget(btn, posY, posX, len(self.products) > self.LIMIT_ITEMS_COUNT_X and 1 or 2, 1)
             posX += 1
@@ -74,7 +75,8 @@ class ProductList:
             QSizePolicy.Preferred,
             QSizePolicy.Preferred)
 
-        button_back.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 28px; font-weight: bold; color: white")
+        button_back.setStyleSheet(
+            "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 28px; font-weight: bold; color: white")
 
         grid.addWidget(button_back, round(len(self.products) / self.LIMIT_ITEMS_COUNT_X), 0, 1, -1)
 

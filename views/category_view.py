@@ -3,10 +3,10 @@ from functools import partial
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from models.product_model import Product
 from models.category_model import Category
 
 from views.ProductList import ProductList
+
 
 class CategoryView(QWidget):
     ''' Controlls the product list view, and the objects '''
@@ -14,7 +14,8 @@ class CategoryView(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         self.LIMIT_ITEMS_COUNT_X = 5
-        print("Created")
+
+        self.product_list = None
 
         shape = QDesktopWidget().screenGeometry()
         self.width = shape.width()
@@ -59,7 +60,8 @@ class CategoryView(QWidget):
                 QSizePolicy.Preferred,
                 QSizePolicy.Preferred)
 
-            btn.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 22px; font-weight: bold; color: white")
+            btn.setStyleSheet(
+                "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 22px; font-weight: bold; color: white")
 
             grid.addWidget(btn, posY, posX, 2, 1)
             posX += 1
@@ -74,7 +76,8 @@ class CategoryView(QWidget):
             QSizePolicy.Preferred,
             QSizePolicy.Preferred)
 
-        button_back.setStyleSheet("background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 28px; font-weight: bold; color: white")
+        button_back.setStyleSheet(
+            "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 28px; font-weight: bold; color: white")
 
         grid.addWidget(button_back, 2, 0, 1, -1)
 
