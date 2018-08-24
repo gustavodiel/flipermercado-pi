@@ -2,7 +2,7 @@ import os
 import requests
 
 IS_TESTING = True
-TEST_URL = 'http://localhost:3050/'
+TEST_URL = 'http://localhost:3000/'
 
 
 # URL Functions
@@ -41,7 +41,3 @@ def fetch_all_products():
 def fetch_user(id):
     request = requests.get("{}/{}".format(user_url(), str(id)))
     return request.json()
-
-
-result = fetch_all_products()
-print(list(filter(lambda product: product['price'] > 5, result)))
