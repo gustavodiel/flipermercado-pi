@@ -1,3 +1,5 @@
+import requests
+
 from models.product_model import Product
 
 

@@ -21,9 +21,6 @@ class ProductList:
         self.products = products
         self.widget = self.createWidget()
 
-    def getProducts(self):
-        return Category.get_categories()
-
     def show(self):
         self.widget.showFullScreen()
 
@@ -81,3 +78,7 @@ class ProductList:
         grid.addWidget(button_back, round(len(self.products) / self.LIMIT_ITEMS_COUNT_X), 0, 1, -1)
 
         return widget
+
+    @staticmethod
+    def getProducts():
+        return Category.get_categories()
