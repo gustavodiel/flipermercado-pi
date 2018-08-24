@@ -10,7 +10,7 @@ from views.popup_view import PopupView
 class ProductList:
     ''' Controlls the product list view, and the objects '''
 
-    def __init__(self, products):
+    def __init__(self, products, main_window):
         self.LIMIT_ITEMS_COUNT_X = 2
         self.LIMIT_ITEMS_COUNT_Y = 1
 
@@ -20,6 +20,8 @@ class ProductList:
 
         self.products = products
         self.widget = self.createWidget()
+
+        self.main_window = main_window
 
     def show(self):
         self.widget.showFullScreen()
@@ -32,6 +34,7 @@ class ProductList:
         self.popup.showFullScreen()
 
     def handle_back_button_pressed(self):
+        self.main_window.reload_data()
         self.widget.close()
 
     def createWidget(self):
