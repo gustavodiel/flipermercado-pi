@@ -6,6 +6,7 @@ from PyQt4.QtCore import *
 from models.category_model import Category
 
 from views.ProductList import ProductList
+from models.product_model import Product
 
 
 class CategoryView(QWidget):
@@ -34,7 +35,7 @@ class CategoryView(QWidget):
         self.widget.hide()
 
     def handle_category_pressed(self, category):
-        self.product_list = ProductList(category.products)
+        self.product_list = ProductList(Product.get_products(category.name))
         self.product_list.show()
 
     def handle_back_button_pressed(self):

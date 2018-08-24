@@ -45,8 +45,8 @@ class ProductList:
         bg.setAlignment(Qt.AlignCenter)
 
         # Add a button
-        posX = 0
-        posY = 0
+        pos_x = 0
+        pos_y = 0
         for i in self.products:
             btn = QPushButton('{}\nR${:.2f}'.format(i.name, i.price))
             btn.clicked.connect(partial(self.handleProductPressed, i))
@@ -57,13 +57,13 @@ class ProductList:
             btn.setStyleSheet(
                 "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
 
-            grid.addWidget(btn, posY, posX, len(self.products) > self.LIMIT_ITEMS_COUNT_X and 1 or 2, 1)
-            posX += 1
+            grid.addWidget(btn, pos_y, pos_x, len(self.products) > self.LIMIT_ITEMS_COUNT_X and 1 or 1, 1)
+            pos_x += 1
 
-            if posX > self.LIMIT_ITEMS_COUNT_X:
-                posX = 0
-                posY += 1
-            if posY >= self.LIMIT_ITEMS_COUNT_Y:
+            if pos_x > self.LIMIT_ITEMS_COUNT_X:
+                pos_x = 0
+                pos_y += 1
+            if pos_y >= self.LIMIT_ITEMS_COUNT_Y:
                 pass
 
         button_back = QPushButton('Voltar')
