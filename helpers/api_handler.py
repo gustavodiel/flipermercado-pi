@@ -33,7 +33,6 @@ def products_url():
 # Fetchers
 def fetch_all_products():
     request = requests.get(products_url())
-    print(request.url)
 
     return request.json()
 
