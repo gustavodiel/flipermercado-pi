@@ -10,7 +10,7 @@ from views.popup_view import PopupView
 class ProductList:
     ''' Controlls the product list view, and the objects '''
 
-    def __init__(self, products):
+    def __init__(self, products, main_window):
         self.LIMIT_ITEMS_COUNT_X = 2
         self.LIMIT_ITEMS_COUNT_Y = 1
 
@@ -21,8 +21,7 @@ class ProductList:
         self.products = products
         self.widget = self.createWidget()
 
-    def getProducts(self):
-        return Category.get_categories()
+        self.main_window = main_window
 
     def show(self):
         self.widget.showFullScreen()
@@ -35,6 +34,7 @@ class ProductList:
         self.popup.showFullScreen()
 
     def handle_back_button_pressed(self):
+        self.main_window.reload_data()
         self.widget.close()
 
     def createWidget(self):
@@ -48,8 +48,8 @@ class ProductList:
         bg.setAlignment(Qt.AlignCenter)
 
         # Add a button
-        posX = 0
-        posY = 0
+        pos_x = 0
+        pos_y = 0
         for i in self.products:
             btn = QPushButton('{}\nR${:.2f}'.format(i.name, i.price))
             btn.clicked.connect(partial(self.handleProductPressed, i))
@@ -60,13 +60,13 @@ class ProductList:
             btn.setStyleSheet(
                 "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
 
-            grid.addWidget(btn, posY, posX, len(self.products) > self.LIMIT_ITEMS_COUNT_X and 1 or 2, 1)
-            posX += 1
+            grid.addWidget(btn, pos_y, pos_x, len(self.products) > self.LIMIT_ITEMS_COUNT_X and 1 or 1, 1)
+            pos_x += 1
 
-            if posX > self.LIMIT_ITEMS_COUNT_X:
-                posX = 0
-                posY += 1
-            if posY >= self.LIMIT_ITEMS_COUNT_Y:
+            if pos_x > self.LIMIT_ITEMS_COUNT_X:
+                pos_x = 0
+                pos_y += 1
+            if pos_y >= self.LIMIT_ITEMS_COUNT_Y:
                 pass
 
         button_back = QPushButton('Voltar')
@@ -81,3 +81,7 @@ class ProductList:
         grid.addWidget(button_back, round(len(self.products) / self.LIMIT_ITEMS_COUNT_X), 0, 1, -1)
 
         return widget
+
+    @staticmethod
+    def getProducts():
+        return Category.get_categories()
