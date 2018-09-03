@@ -1,7 +1,7 @@
 import os
 import requests
 
-IS_TESTING = True
+IS_TESTING = False
 TEST_URL = 'http://localhost:3000/'
 
 
