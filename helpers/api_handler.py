@@ -1,42 +1,71 @@
 import os
 import requests
 
-IS_TESTING = False
-TEST_URL = 'http://localhost:3000/'
+from requests.auth import HTTPDigestAuth, HTTPBasicAuth
+from requests_oauthlib import OAuth1
 
+IS_TESTING = True
+TEST_URL = 'http://localhost:3000/'
 
 # URL Functions
 def server_name():
-    """
-    Returns the main server URL
-    :return: API's URL
-    """
     return IS_TESTING and TEST_URL or os.environ['FLIPERMERCADO_SERVER_NAME']
 
 
 def user_url():
-    """
-    Returns URL with all users
-    :return: API's URL for all users
-    """
     return server_name() + 'user'
 
 
 def products_url():
-    """
-    Returns URL for all products
-    :return: API's URL for all products
-    """
     return server_name() + 'products'
+
+
+def categories_url():
+    return server_name() + 'categories'
+
+
+# Session helper
+def session_request_at_url(session, url):
+    session.auth = HTTPBasicAuth(os.environ['FLIPERMERCADO_USER_NAME'], os.environ['FLIPERMERCADO_USER_PASS'])
+
+    request = session.get(url)
+
+    if request.status_code == 401:
+        raise Exception('Permission Denied to access {} with user: {}'.format(request.url, str(session.auth.username)))
+
+    if request.status_code == 500:
+        raise Exception('Server send error code: {}'.format(request.json()))
+
+    return request
 
 
 # Fetchers
 def fetch_all_products():
-    request = requests.get(products_url())
+    session = requests.Session()
 
-    return request.json()
+    return session_request_at_url(session, products_url()).json()
 
 
-def fetch_user(id):
-    request = requests.get("{}/{}".format(user_url(), str(id)))
-    return request.json()
+def fetch_all_categories():
+    session = requests.Session()
+
+    return session_request_at_url(session, categories_url()).json()
+
+
+def fetch_products_by_category(category):
+    params = {
+        'category': category
+    }
+
+    session = requests.Session()
+    session.params = params
+
+    return session_request_at_url(session, products_url()).json()
+
+
+
+def fetch_user(user_id):
+    session = requests.Session()
+    url = "{}/{}".format(user_url(), str(user_id))
+
+    return session_request_at_url(session, url)

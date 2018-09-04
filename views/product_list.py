@@ -8,7 +8,7 @@ from views.popup_view import PopupView
 
 
 class ProductList:
-    ''' Controlls the product list view, and the objects '''
+    """ Controlls the product list view, and the objects """
 
     def __init__(self, products, main_window):
         self.LIMIT_ITEMS_COUNT_X = 2
@@ -17,6 +17,8 @@ class ProductList:
         shape = QDesktopWidget().screenGeometry()
         self.width = shape.width()
         self.height = shape.height()
+
+        self.popup = None
 
         self.products = products
         self.widget = self.createWidget()
@@ -36,6 +38,13 @@ class ProductList:
     def handle_back_button_pressed(self):
         self.main_window.reload_data()
         self.widget.close()
+
+    def item_len_for_amount(self, amount):
+        if amount <= 3:
+            return 1
+
+        if amount > self.LIMIT_ITEMS_COUNT_X:
+            return 1
 
     def createWidget(self):
         widget = QWidget()
@@ -60,7 +69,7 @@ class ProductList:
             btn.setStyleSheet(
                 "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
 
-            grid.addWidget(btn, pos_y, pos_x, len(self.products) > self.LIMIT_ITEMS_COUNT_X and 1 or 1, 1)
+            grid.addWidget(btn, pos_y, pos_x, self.item_len_for_amount(len(self.products)), 1)
             pos_x += 1
 
             if pos_x > self.LIMIT_ITEMS_COUNT_X:

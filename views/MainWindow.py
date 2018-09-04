@@ -1,7 +1,7 @@
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from views.category_view import CategoryView
+from views.category_list import CategoryView
 
 
 class MainWindow:

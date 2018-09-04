@@ -9,13 +9,12 @@ class Product:
     @staticmethod
     def get_products(category):
         data = Product.fetch_result(category)
+        print(data)
         return [Product(product['price'], product['description']) for product in data]
 
 
     @staticmethod
     def fetch_result(category):
-        result = api_handler.fetch_all_products()
-        if not category:
-            return result
+        result = api_handler.fetch_products_by_category(category)
 
         return result

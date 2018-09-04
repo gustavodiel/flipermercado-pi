@@ -5,12 +5,12 @@ from PyQt4.QtCore import *
 
 from models.category_model import Category
 
-from views.ProductList import ProductList
+from views.product_list import ProductList
 from models.product_model import Product
 
 
 class CategoryView(QWidget):
-    ''' Controlls the product list view, and the objects '''
+    """ Controlls the product list view, and the objects """
 
     def __init__(self):
         QWidget.__init__(self)

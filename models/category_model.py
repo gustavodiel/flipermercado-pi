@@ -1,11 +1,12 @@
-import requests
-
 from models.product_model import Product
-
+from helpers import api_handler
 
 class Category:
 
-    def __init__(self, name, products=[]):
+    def __init__(self, name, products=None):
+        if products is None:
+            products = []
+
         self.name = name
         self.products = products
 
@@ -13,7 +14,14 @@ class Category:
     def get_categories():
         # Fetch from server
 
-        return [
-            Category("Bebidas", Product.get_products("Bebidas")),
-            Category("Bolachas/Biscoitos", Product.get_products("Bolachas")),
-            Category("Salgados", Product.get_products("Salgados"))]
+        categorias = api_handler.fetch_all_categories()
+
+        ret = []
+
+        for query in categorias:
+            name = query['category']
+            categoria = Category(name, Product.get_products(name))
+
+            ret.append(categoria)
+
+        return ret
