@@ -7,9 +7,14 @@ from requests_oauthlib import OAuth1
 IS_TESTING = True
 TEST_URL = 'http://localhost:3000/'
 
+SERVER_NAME_VARIABLE = 'FLIPERMERCADO_SERVER_NAME'
+USER_NAME_VARIABLE = 'FLIPERMERCADO_USER_NAME'
+USER_PASSWORD_VARIABLE = 'FLIPERMERCADO_USER_PASS'
+
+
 # URL Functions
 def server_name():
-    return IS_TESTING and TEST_URL or os.environ['FLIPERMERCADO_SERVER_NAME']
+    return IS_TESTING and TEST_URL or os.environ[SERVER_NAME_VARIABLE]
 
 
 def user_url():
@@ -26,7 +31,7 @@ def categories_url():
 
 # Session helper
 def session_request_at_url(session, url):
-    session.auth = HTTPBasicAuth(os.environ['FLIPERMERCADO_USER_NAME'], os.environ['FLIPERMERCADO_USER_PASS'])
+    session.auth = HTTPBasicAuth(os.environ[USER_NAME_VARIABLE], os.environ[USER_PASSWORD_VARIABLE])
 
     request = session.get(url)
 
