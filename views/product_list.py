@@ -1,4 +1,5 @@
 from functools import partial
+from itertools import zip_longest
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
@@ -11,7 +12,7 @@ class ProductList:
     """ Controlls the product list view, and the objects """
 
     def __init__(self, products, main_window):
-        self.LIMIT_ITEMS_COUNT_X = 2
+        self.LIMIT_ITEMS_COUNT_X = 3
         self.LIMIT_ITEMS_COUNT_Y = 1
 
         shape = QDesktopWidget().screenGeometry()
@@ -59,24 +60,33 @@ class ProductList:
         # Add a button
         pos_x = 0
         pos_y = 0
-        for i in self.products:
-            btn = QPushButton('{}\nR${:.2f}'.format(i.name, i.price))
-            btn.clicked.connect(partial(self.handleProductPressed, i))
-            btn.setSizePolicy(
-                QSizePolicy.Preferred,
-                QSizePolicy.Preferred)
+        self.products += self.products * 8
 
-            btn.setStyleSheet(
-                "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
+        for groups in self.grouper(self.LIMIT_ITEMS_COUNT_X, self.products):
+            num_elements_group = len([x for x in groups if x])
+            for product in groups:
+                if not product or product is None:
+                    continue
 
-            grid.addWidget(btn, pos_y, pos_x, self.item_len_for_amount(len(self.products)), 1)
-            pos_x += 1
+                btn = QPushButton('{}\nR${:.2f}'.format(product.name, product.price))
+                btn.clicked.connect(partial(self.handleProductPressed, product))
+                btn.setSizePolicy(
+                    QSizePolicy.Preferred,
+                    QSizePolicy.Preferred)
 
-            if pos_x > self.LIMIT_ITEMS_COUNT_X:
-                pos_x = 0
-                pos_y += 1
-            if pos_y >= self.LIMIT_ITEMS_COUNT_Y:
-                pass
+                btn.setStyleSheet(
+                    "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 18px; font-weight: bold; color: white")
+
+
+                # if num_elements_group != self.LIMIT_ITEMS_COUNT_X and pos_y > 0:
+                grid.addWidget(btn, pos_y, pos_x, self.item_len_for_amount(len(self.products)), 1)
+                print("{} vs {}".format((self.LIMIT_ITEMS_COUNT_X + 1) - num_elements_group, 2 * self.LIMIT_ITEMS_COUNT_X / num_elements_group))
+                # else:
+                #     grid.addWidget(btn, pos_y, pos_x, self.item_len_for_amount(len(self.products)), 2)
+                pos_x += 1
+
+            pos_x = 0
+            pos_y += 1
 
         button_back = QPushButton('Voltar')
         button_back.clicked.connect(self.handle_back_button_pressed)
@@ -87,10 +97,17 @@ class ProductList:
         button_back.setStyleSheet(
             "background-color: rgba(0, 0, 0, 0); border: 2px solid white; font-size: 28px; font-weight: bold; color: white")
 
-        grid.addWidget(button_back, round(len(self.products) / self.LIMIT_ITEMS_COUNT_X), 0, 1, -1)
+        grid.addWidget(button_back, max(round(len(self.products) / self.LIMIT_ITEMS_COUNT_X), 2), 0, 1, -1)
 
         return widget
 
     @staticmethod
     def getProducts():
         return Category.get_categories()
+
+
+    @staticmethod
+    def grouper(n, iterable, fillvalue=None):
+        "Collect data into fixed-length chunks or blocks"
+        args = [iter(iterable)] * n
+        return zip_longest(fillvalue=fillvalue, *args)
