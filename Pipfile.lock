@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7277484299af6e13b6cf812949146efca5c308611de91d5a6a40ce36c3e8275f"
+            "sha256": "fddcc542627ccfcce2821300aa75721098efe1b38941a392cc363b67d563ca7d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,15 +18,26 @@
     "default": {
         "pyside2": {
             "hashes": [
-                "sha256:1d600d41fff235c62765af39f0cea257ce8e1d7870abc66075a385c9d8c62c54",
-                "sha256:5c80a19762ba534b402662be4b9fcf0c75cd0aac5f2eedad1867380d49c27ae8",
-                "sha256:734ee2ea12c6e4b0bf4c4367868adf7eebecec8ae149d0d463417a9ab1f31199",
-                "sha256:b36d876339a9ecc1d6faa1f40dd5e53da2deb5495ac5ec10ee81529280bef096",
-                "sha256:c29263dfba6227fca9952b79978343b566c79925597c2a8498b1e8f5f87c3eb5",
-                "sha256:cd1bf8f0793aac63f5ff8320629ada906aeb260300f1fea1ed693093cd934108"
+                "sha256:28c84514f4da903d00c59026c4d932b18ba5346b77959e5b23a36e68ed116e07",
+                "sha256:6630b1580fce924b953c8a8bed2e18a74d52b82cc8850ffdb9265b3977ac1c3d",
+                "sha256:764f610693829fa315eaea1e0316faf138f43b9501f7fa1826e99be344f84f25",
+                "sha256:7f8064c9e443d9fa817e1d939c67c698d5039c5154d06df2bc5bea1ee08614ae",
+                "sha256:aca1358217be52d003f1268c767a06ffe574a1715960ba6a10beda5c39acd34e",
+                "sha256:e5fcd43289f43b0baaf2ff3629fea01e669b0f7e01264222ae963bda8e3e42f7"
             ],
             "index": "pypi",
-            "version": "==5.11.0"
+            "version": "==5.12.0"
+        },
+        "shiboken2": {
+            "hashes": [
+                "sha256:0a70a0b9960c1cea426dae1ed1082ac2d0ff2f7f46862aef190f0f5067fdaf93",
+                "sha256:1985ebb922897bf6344e2f138a758d6190366a5426d9a45fb68465bcdebba4eb",
+                "sha256:386939d8357d5d14338e7ab3f574060fb5044a4044f2cf718b6fbd23ce3887e1",
+                "sha256:63ab17e3bf12351b26705c9dc9653d63d714d404fe2975b54cbb08846328e7e3",
+                "sha256:9e5d248064eca947828e36d608d80922b1fe00445587ad42b3a532d8502a17fb",
+                "sha256:a8a377fe251e4ba81ca33f2e227ac6afe1189512311c8823a133b212c12bc294"
+            ],
+            "version": "==5.12.0"
         },
         "sip": {
             "hashes": [
